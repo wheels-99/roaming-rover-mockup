@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roaming Rover — Mobile Dog Grooming · Hudson Valley, NY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Fraunces:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+/* ── Reset ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── Palette & Variables ────────────────────────────── */
+:root {
+  --pink:        #FF4D8D;
+  --pink-deep:   #D6215E;
+  --pink-mid:    #FF7AAD;
+  --pink-light:  #FFD6E7;
+  --pink-pale:   #FFF0F6;
+  --yellow:      #FFD23F;
+  --yellow-pale: #FFFAE8;
+  --mint:        #3DDBB8;
+  --mint-pale:   #E6FAF6;
+  --white:       #FFFFFF;
+  --ink:         #1A1018;
+  --ink-mid:     #5C4558;
+  --ink-light:   #9C85A0;
+  --cream:       #FDF8FF;
+  --serif:       'Fraunces', Georgia, serif;
+  --sans:        'Nunito', sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Animations ─────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50%       { transform: translateY(-10px) rotate(2deg); }
+}
+@keyframes wiggle {
+  0%,100% { transform: rotate(-3deg); }
+  50%     { transform: rotate(3deg); }
+}
+@keyframes pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.fade-up { animation: fadeUp 0.6s ease both; }
+.fade-up-1 { animation: fadeUp 0.6s 0.1s ease both; }
+.fade-up-2 { animation: fadeUp 0.6s 0.2s ease both; }
+.fade-up-3 { animation: fadeUp 0.6s 0.35s ease both; }
+.fade-up-4 { animation: fadeUp 0.6s 0.5s ease both; }
+
+/* ── Nav ────────────────────────────────────────────── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 2px solid var(--pink-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 68px;
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--pink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo .paw {
+  width: 34px; height: 34px;
+  background: var(--pink);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  animation: wiggle 2.5s ease-in-out infinite;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--pink); }
+.nav-cta {
+  background: var(--pink);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+}
+.nav-cta:hover { background: var(--pink-deep); transform: scale(1.04); }
+
+/* ── Hero ────────────────────────────────────────────── */
+.hero {
+  background: var(--pink-pale);
+  padding: 80px 40px 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 40px;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  background: var(--pink-light);
+  border-radius: 50%;
+  z-index: 0;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: 20%;
+  width: 260px; height: 260px;
+  background: var(--yellow);
+  border-radius: 50%;
+  opacity: 0.25;
+  z-index: 0;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--yellow);
+  color: #7A5500;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--pink);
+}
+.hero p {
+  font-size: 17px;
+  color: var(--ink-mid);
+  max-width: 420px;
+  margin-bottom: 32px;
+  line-height: 1.65;
+}
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.btn-primary {
+  background: var(--pink);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 30px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--pink-deep); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent;
+  color: var(--pink-deep);
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: 2.5px solid var(--pink);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-outline:hover { background: var(--pink-light); }
+.hero-phone {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--ink-mid);
+}
+.hero-phone strong {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--pink-deep);
+}
+.hero-phone .phone-icon {
+  width: 38px; height: 38px;
+  background: var(--pink);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-phone .phone-icon svg { width: 18px; height: 18px; fill: white; }
+
+/* Hero Illustration */
+.hero-art {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0;
+}
+.van-wrap {
+  position: relative;
+  animation: float 4s ease-in-out infinite;
+}
+.van-svg { width: 100%; max-width: 460px; }
+
+/* Decorative bubbles */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 2;
+}
+.b1 { width:60px;height:60px;background:var(--yellow);top:-30px;right:60px;animation:float 3s 0.5s ease-in-out infinite; }
+.b2 { width:36px;height:36px;background:var(--mint);top:30px;left:-20px;animation:float 4s 1s ease-in-out infinite; }
+.b3 { width:22px;height:22px;background:var(--pink-light);bottom:80px;right:-10px;animation:float 3.5s 0.2s ease-in-out infinite; }
+
+/* ── Marquee strip ──────────────────────────────────── */
+.marquee-wrap {
+  background: var(--pink);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 22s linear infinite;
+}
+.marquee-item {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  padding: 0 28px;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.marquee-dot {
+  width: 6px; height: 6px;
+  background: var(--pink-light);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ── Stats bar ──────────────────────────────────────── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--white);
+  border-bottom: 2px solid var(--pink-light);
+}
+.stat-item {
+  padding: 28px 20px;
+  text-align: center;
+  border-right: 1.5px solid var(--pink-light);
+}
+.stat-item:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--serif);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--pink);
+  display: block;
+  line-height: 1;
+}
+.stat-l {
+  font-size: 13px;
+  color: var(--ink-light);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* ── Section commons ────────────────────────────────── */
+.section { padding: 80px 40px; }
+.section-tag {
+  display: inline-block;
+  background: var(--pink-light);
+  color: var(--pink-deep);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+.section-tag.yellow { background: var(--yellow); color: #7A5500; }
+.section-tag.mint { background: var(--mint-pale); color: #1A6E5E; }
+.section h2 {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.section .lead {
+  font-size: 17px;
+  color: var(--ink-mid);
+  max-width: 540px;
+  line-height: 1.65;
+  margin-bottom: 48px;
+}
+
+/* ── Services ───────────────────────────────────────── */
+.services { background: var(--cream); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.svc-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 28px;
+  border: 2px solid var(--pink-light);
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.svc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--pink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.svc-card:hover { border-color: var(--pink); transform: translateY(-4px); }
+.svc-card:hover::before { transform: scaleX(1); }
+.svc-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin-bottom: 16px;
+}
+.svc-icon.pink { background: var(--pink-pale); }
+.svc-icon.yellow { background: var(--yellow-pale); }
+.svc-icon.mint { background: var(--mint-pale); }
+.svc-card h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.svc-card p { font-size: 14px; color: var(--ink-mid); line-height: 1.6; margin-bottom: 16px; }
+.svc-price {
+  display: inline-block;
+  background: var(--pink-pale);
+  color: var(--pink-deep);
+  font-size: 14px;
+  font-weight: 800;
+  padding: 5px 14px;
+  border-radius: 50px;
+}
+
+/* ── Why mobile ─────────────────────────────────────── */
+.why { background: var(--pink); }
+.why .section-tag { background: rgba(255,255,255,0.25); color: white; }
+.why h2 { color: white; }
+.why .lead { color: rgba(255,255,255,0.8); max-width: 100%; }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.why-card {
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 28px 24px;
+  transition: background 0.2s;
+}
+.why-card:hover { background: rgba(255,255,255,0.22); }
+.why-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: block;
+}
+.why-card h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: white;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.why-card p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+
+/* ── Booking ─────────────────────────────────────────── */
+.booking { background: var(--cream); }
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.booking-left h2 { margin-bottom: 16px; }
+.booking-left p { font-size: 16px; color: var(--ink-mid); margin-bottom: 28px; line-height: 1.65; }
+.trust-items { display: flex; flex-direction: column; gap: 14px; }
+.trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.trust-dot {
+  width: 32px; height: 32px; flex-shrink: 0;
+  background: var(--pink-pale);
+  border: 2px solid var(--pink-light);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+}
+.trust-item strong { font-size: 14px; font-weight: 700; display: block; margin-bottom: 2px; }
+.trust-item span { font-size: 13px; color: var(--ink-mid); }
+
+.booking-form-wrap {
+  background: var(--white);
+  border-radius: 24px;
+  padding: 36px 32px;
+  border: 2px solid var(--pink-light);
+}
+.booking-form-wrap h3 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.booking-form-wrap .form-sub {
+  font-size: 14px;
+  color: var(--ink-light);
+  margin-bottom: 24px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.form-group label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-mid);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--pink-light);
+  background: var(--pink-pale);
+  color: var(--ink);
+  transition: border-color 0.2s;
+  outline: none;
+  width: 100%;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--pink);
+  background: white;
+}
+.form-group textarea { resize: none; height: 80px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-submit {
+  width: 100%;
+  background: var(--pink);
+  color: white;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 800;
+  padding: 15px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s;
+}
+.form-submit:hover { background: var(--pink-deep); transform: translateY(-2px); }
+.form-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-top: 12px;
+}
+
+/* ── Testimonials ───────────────────────────────────── */
+.testimonials { background: var(--pink-pale); }
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.testi-card {
+  background: white;
+  border-radius: 20px;
+  padding: 28px 24px;
+  border: 2px solid var(--pink-light);
+  position: relative;
+}
+.testi-card::before {
+  content: '"';
+  font-family: var(--serif);
+  font-size: 80px;
+  color: var(--pink-light);
+  position: absolute;
+  top: 10px; left: 20px;
+  line-height: 1;
+}
+.stars { color: var(--yellow); font-size: 15px; margin-bottom: 14px; letter-spacing: 2px; }
+.testi-card blockquote {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-mid);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+}
+.av-pink { background: var(--pink-light); color: var(--pink-deep); }
+.av-yellow { background: var(--yellow-pale); color: #7A5500; }
+.av-mint { background: var(--mint-pale); color: #1A6E5E; }
+.testi-author strong { font-size: 14px; font-weight: 700; display: block; }
+.testi-author span { font-size: 12px; color: var(--ink-light); }
+
+/* ── Service area ───────────────────────────────────── */
+.area { background: var(--yellow-pale); }
+.area-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.area-map-block {
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  border: 2px solid var(--yellow);
+  text-align: center;
+}
+.map-placeholder {
+  background: var(--yellow-pale);
+  border-radius: 16px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.map-placeholder svg { opacity: 0.25; }
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.map-pin { font-size: 40px; animation: float 3s ease-in-out infinite; }
+.map-label { font-size: 14px; font-weight: 700; color: var(--ink-mid); margin-top: 6px; }
+.county-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.pill {
+  background: var(--yellow);
+  color: #5A3D00;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: 50px;
+}
+.area-right h2 { margin-bottom: 16px; }
+.area-right p { font-size: 16px; color: var(--ink-mid); margin-bottom: 28px; line-height: 1.65; }
+.area-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.area-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.area-check {
+  width: 28px; height: 28px;
+  background: var(--yellow);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+/* ── AKC Banner ─────────────────────────────────────── */
+.akc-banner {
+  background: var(--mint-pale);
+  border-top: 2px solid var(--mint);
+  border-bottom: 2px solid var(--mint);
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.akc-left { display: flex; align-items: center; gap: 20px; }
+.akc-badge {
+  width: 64px; height: 64px;
+  background: var(--mint);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+  animation: pop 3s ease-in-out infinite;
+}
+.akc-left h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: #1A6E5E;
+  margin-bottom: 4px;
+}
+.akc-left p { font-size: 14px; color: #2D8C78; }
+
+/* ── Footer ─────────────────────────────────────────── */
+footer {
+  background: var(--ink);
+  color: white;
+  padding: 60px 40px 36px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand .logo {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--pink-mid);
+  margin-bottom: 14px;
+  display: block;
+}
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 280px; margin-bottom: 20px; }
+.footer-phone {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--pink-mid);
+  text-decoration: none;
+}
+.footer-col h4 {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 16px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col ul a:hover { color: var(--pink-mid); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+}
+.footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; }
+
+/* ── Scroll reveal ──────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 50px 20px 30px; min-height: auto; }
+  .hero h1 { font-size: 36px; }
+  .hero-art { display: none; }
+  .section { padding: 56px 20px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .booking-layout { grid-template-columns: 1fr; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .area-layout { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: 1fr; }
+  .stat-item { border-right: none; border-bottom: 1.5px solid var(--pink-light); }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  .akc-banner { flex-direction: column; text-align: center; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ─────────────────────────────────────────── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="paw">🐾</span>
+    Roaming Rover
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why mobile?</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#area">Service area</a></li>
+  </ul>
+  <a href="#book" class="nav-cta">Book now</a>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge fade-up">
+      ⭐ AKC-Certified Groomer
+    </div>
+    <h1 class="fade-up-1">
+      Grooming that<br>comes <em>to you!</em>
+    </h1>
+    <p class="fade-up-2">
+      No kennels, no cages, no stress. Roaming Rover brings full-service dog grooming right to your driveway — serving Orange, Ulster &amp; Dutchess Counties.
+    </p>
+    <div class="hero-btns fade-up-3">
+      <a href="#book" class="btn-primary">Schedule appointment</a>
+      <a href="#services" class="btn-outline">See services</a>
+    </div>
+    <div class="hero-phone fade-up-4">
+      <div class="phone-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+        </svg>
+      </div>
+      <div>
+        <div style="font-size:13px;color:var(--ink-light)">Call or text us</div>
+        <strong>(845) 374-7825</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-art fade-up-2">
+    <div class="van-wrap">
+      <div class="bubble b1"></div>
+      <div class="bubble b2"></div>
+      <div class="bubble b3"></div>
+      <!-- Van SVG illustration -->
+      <svg class="van-svg" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Van body -->
+        <rect x="30" y="100" width="380" height="150" rx="18" fill="#FF4D8D"/>
+        <!-- Cab top -->
+        <rect x="260" y="50" width="150" height="100" rx="14" fill="#D6215E"/>
+        <!-- Windows cab -->
+        <rect x="275" y="62" width="120" height="70" rx="8" fill="#FFD6E7" opacity="0.6"/>
+        <!-- Side window -->
+        <rect x="45" y="115" width="80" height="55" rx="8" fill="#FFD6E7" opacity="0.5"/>
+        <rect x="140" y="115" width="80" height="55" rx="8" fill="#FFD6E7" opacity="0.5"/>
+        <!-- Logo on van side -->
+        <rect x="50" y="175" width="180" height="58" rx="10" fill="white" opacity="0.15"/>
+        <text x="140" y="200" text-anchor="middle" font-family="'Fraunces',serif" font-size="14" font-weight="700" fill="white">Roaming Rover</text>
+        <text x="140" y="218" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="11" fill="rgba(255,255,255,0.8)">Mobile Dog Grooming</text>
+        <!-- Door line -->
+        <line x1="240" y1="100" x2="240" y2="250" stroke="white" stroke-width="1.5" opacity="0.3"/>
+        <!-- Door handle -->
+        <rect x="225" y="175" width="12" height="5" rx="2.5" fill="white" opacity="0.5"/>
+        <!-- Wheels -->
+        <circle cx="110" cy="258" r="36" fill="#1A1018"/>
+        <circle cx="110" cy="258" r="24" fill="#FF7AAD"/>
+        <circle cx="110" cy="258" r="10" fill="#1A1018"/>
+        <circle cx="350" cy="258" r="36" fill="#1A1018"/>
+        <circle cx="350" cy="258" r="24" fill="#FF7AAD"/>
+        <circle cx="350" cy="258" r="10" fill="#1A1018"/>
+        <!-- Wheel bolts -->
+        <circle cx="96" cy="250" r="3" fill="#1A1018"/>
+        <circle cx="124" cy="250" r="3" fill="#1A1018"/>
+        <circle cx="110" cy="244" r="3" fill="#1A1018"/>
+        <circle cx="110" cy="272" r="3" fill="#1A1018"/>
+        <!-- Exhaust puff -->
+        <circle cx="20" cy="230" r="12" fill="white" opacity="0.2"/>
+        <circle cx="8" cy="220" r="8" fill="white" opacity="0.13"/>
+        <!-- Stars / sparkles -->
+        <text x="420" y="90" font-size="22" opacity="0.6">✨</text>
+        <text x="15" y="150" font-size="16" opacity="0.4">✦</text>
+        <text x="240" y="45" font-size="14" opacity="0.5">♡</text>
+        <!-- Dog head peeking from window -->
+        <circle cx="330" cy="88" r="22" fill="#FFD23F"/>
+        <circle cx="321" cy="82" r="7" fill="#1A1018"/>
+        <circle cx="339" cy="82" r="7" fill="#1A1018"/>
+        <circle cx="322" cy="83" r="3" fill="white"/>
+        <circle cx="340" cy="83" r="3" fill="white"/>
+        <ellipse cx="330" cy="96" rx="7" ry="4" fill="#E8A020"/>
+        <!-- dog ears -->
+        <ellipse cx="312" cy="72" rx="8" ry="12" fill="#FFD23F" transform="rotate(-15 312 72)"/>
+        <ellipse cx="348" cy="72" rx="8" ry="12" fill="#FFD23F" transform="rotate(15 348 72)"/>
+        <!-- dog tongue -->
+        <ellipse cx="330" cy="101" rx="5" ry="7" fill="#FF7AAD"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ── Marquee ──────────────────────────────────────── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>Full groom &amp; bath</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Nail trimming</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Ear cleaning</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>AKC certified</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Stress-free for your pup</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Orange County</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Ulster County</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Dutchess County</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>10+ years experience</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>One-on-one attention</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Full groom &amp; bath</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Nail trimming</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Ear cleaning</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>AKC certified</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Stress-free for your pup</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Orange County</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Ulster County</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Dutchess County</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>10+ years experience</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>One-on-one attention</span>
+  </div>
+</div>
+
+<!-- ── Stats ────────────────────────────────────────── -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <span class="stat-n">10+</span>
+    <div class="stat-l">Years serving the Hudson Valley</div>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-n">500+</span>
+    <div class="stat-l">Happy dogs groomed</div>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-n">3</span>
+    <div class="stat-l">Counties covered</div>
+  </div>
+</div>
+
+<!-- ── Services ─────────────────────────────────────── -->
+<section class="section services" id="services">
+  <div class="section-tag">Services</div>
+  <h2 class="reveal">Everything your pup needs,<br>right at your door</h2>
+  <p class="lead reveal">All grooming done one-on-one in our fully-equipped mobile van — no cage dryers, no waiting rooms, no other dogs.</p>
+  <div class="services-grid">
+    <div class="svc-card reveal">
+      <div class="svc-icon pink">🛁</div>
+      <h3>Full groom</h3>
+      <p>Our signature service — bath, blow-dry, breed-specific haircut, nail trim, ear cleaning, and a finishing spritz. Your pup leaves looking and smelling amazing.</p>
+      <span class="svc-price">From $75</span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-icon yellow">🪮</div>
+      <h3>Bath &amp; brush</h3>
+      <p>Full shampoo, blow-dry, thorough brushing, ear cleaning, and nail trim — without the haircut. Perfect for short-coated or between-groom maintenance.</p>
+      <span class="svc-price">From $55</span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-icon mint">✂️</div>
+      <h3>Nail trim</h3>
+      <p>A quick, stress-free nail clipping and filing. Great for in-between visits or dogs who just need a touch-up. No appointment needed for regulars!</p>
+      <span class="svc-price">From $20</span>
+    </div>
+    <div class="svc-card reveal">
+      <div class="svc-icon pink">🐾</div>
+      <h3>Puppy intro groom</h3>
+      <p>A gentle, patience-first session designed for first-timers. We take it slow to build positive associations with grooming from an early age.</p>
+      <span class="svc-price">From $45</span>
+    </div>
+  </div>
+  <p style="font-size:14px;color:var(--ink-light);margin-top:24px;text-align:center;">
+    Final price varies by breed size &amp; coat condition. Add-ons available: teeth brushing (+$12), blueberry facial (+$10), flea &amp; tick treatment (+$15).
+  </p>
+</section>
+
+<!-- ── Why Mobile ────────────────────────────────────── -->
+<section class="section why" id="why">
+  <div class="section-tag">Why mobile?</div>
+  <h2 class="reveal">Less stress. Better results.<br>Your dog will love it.</h2>
+  <p class="lead reveal">Traditional grooming salons mean car rides, waiting rooms full of strangers, and cage dryers. We eliminate all of that.</p>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <span class="why-icon">🏠</span>
+      <h3>We come to you</h3>
+      <p>No driving, no dropping off, no picking up. We park right in your driveway and handle everything — you don't have to go anywhere.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">💕</span>
+      <h3>One-on-one attention</h3>
+      <p>Your dog has our complete, undivided attention for the entire session. No other dogs, no distractions, no noise stress.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">⏱️</span>
+      <h3>Done in a fraction of the time</h3>
+      <p>No waiting behind other appointments. Most dogs are done in 1–2 hours — compared to a half-day drop at a salon.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── AKC Banner ────────────────────────────────────── -->
+<div class="akc-banner reveal">
+  <div class="akc-left">
+    <div class="akc-badge">🏆</div>
+    <div>
+      <h3>AKC-Certified Professional Groomer</h3>
+      <p>Roaming Rover holds AKC certification — the gold standard in professional dog grooming.</p>
+    </div>
+  </div>
+  <a href="#book" class="btn-primary" style="background:#3DDBB8;color:#0D4438;white-space:nowrap;">Book your appointment</a>
+</div>
+
+<!-- ── Booking ───────────────────────────────────────── -->
+<section class="section booking" id="book">
+  <div class="booking-layout">
+    <div class="booking-left">
+      <div class="section-tag">Book an appointment</div>
+      <h2 class="reveal">Ready to schedule?<br>Let's do it! 🎉</h2>
+      <p class="reveal">Fill out the form and we'll call you within 2 hours to confirm your appointment. No payment required until after the groom.</p>
+      <div class="trust-items">
+        <div class="trust-item reveal">
+          <div class="trust-dot">📞</div>
+          <div><strong>Confirmed by phone</strong><span>We call to verify your spot and answer any questions</span></div>
+        </div>
+        <div class="trust-item reveal">
+          <div class="trust-dot">💳</div>
+          <div><strong>Pay after service</strong><span>No card required to book — we collect at the end of your appointment</span></div>
+        </div>
+        <div class="trust-item reveal">
+          <div class="trust-dot">📱</div>
+          <div><strong>Text reminders</strong><span>We'll send a reminder the day before so you never forget</span></div>
+        </div>
+        <div class="trust-item reveal">
+          <div class="trust-dot">📍</div>
+          <div><strong>We come to you</strong><span>Give us your address and we'll park right in your driveway</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="booking-form-wrap reveal">
+      <h3>Request an appointment</h3>
+      <p class="form-sub">We'll call to confirm within 2 hours</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" placeholder="Jane Smith">
+        </div>
+        <div class="form-group">
+          <label>Phone number</label>
+          <input type="tel" placeholder="(845) 555-0100">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Dog's name</label>
+          <input type="text" placeholder="Milo">
+        </div>
+        <div class="form-group">
+          <label>Breed</label>
+          <input type="text" placeholder="Maltipoo">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Service</label>
+          <select>
+            <option>Full groom</option>
+            <option>Bath &amp; brush</option>
+            <option>Nail trim</option>
+            <option>Puppy intro groom</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Dog size</label>
+          <select>
+            <option>Small (under 20 lb)</option>
+            <option>Medium (20–50 lb)</option>
+            <option>Large (50–90 lb)</option>
+            <option>XL (90+ lb)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Your address / town</label>
+        <input type="text" placeholder="Newburgh, NY 12550">
+      </div>
+      <div class="form-group">
+        <label>Preferred date &amp; time</label>
+        <input type="text" placeholder="e.g. any Tuesday morning">
+      </div>
+      <div class="form-group">
+        <label>Anything we should know?</label>
+        <textarea placeholder="Anxious around strangers, sensitive left ear, loves treats…"></textarea>
+      </div>
+      <button class="form-submit">Send my request 🐾</button>
+      <p class="form-note">No spam, ever. We only use your info to confirm &amp; schedule your appointment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Testimonials ──────────────────────────────────── -->
+<section class="section testimonials" id="reviews">
+  <div style="text-align:center;margin-bottom:48px;">
+    <div class="section-tag">Reviews</div>
+    <h2 class="reveal" style="max-width:480px;margin:0 auto;">What dog parents are saying 💬</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Milo used to tremble at the groomer. Now he runs to the van. The difference in his anxiety is night and day — I cannot recommend Roaming Rover enough!"</blockquote>
+      <div class="testi-author">
+        <div class="avatar av-pink">SM</div>
+        <div>
+          <strong>Sarah M.</strong>
+          <span>Newburgh, NY · Maltipoo</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Three collies are not easy. They come out looking like show dogs every single time, and they're calm for the rest of the day. Absolutely amazing service."</blockquote>
+      <div class="testi-author">
+        <div class="avatar av-yellow">JB</div>
+        <div>
+          <strong>James B.</strong>
+          <span>Middletown, NY · Rough Collies</span>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <blockquote>"The convenience is unmatched. I work from home and they're in and out in 90 minutes — my golden retriever looks gorgeous and I didn't have to leave my desk!"</blockquote>
+      <div class="testi-author">
+        <div class="avatar av-mint">KL</div>
+        <div>
+          <strong>Karen L.</strong>
+          <span>Poughkeepsie, NY · Golden Retriever</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Service Area ──────────────────────────────────── -->
+<section class="section area" id="area">
+  <div class="area-layout">
+    <div class="area-map-block reveal">
+      <div class="map-placeholder">
+        <svg viewBox="0 0 300 200" width="300" height="200">
+          <path d="M60 40 Q150 10 240 50 Q290 90 260 160 Q210 200 140 190 Q70 185 40 140 Q20 100 60 40Z" fill="#E8A020"/>
+          <path d="M80 60 Q150 35 210 65 Q250 95 230 150 Q195 180 140 172 Q85 165 65 125 Q50 95 80 60Z" fill="#FFD23F"/>
+        </svg>
+        <div class="map-overlay">
+          <div class="map-pin">📍</div>
+          <div class="map-label">Hudson Valley, NY</div>
+        </div>
+      </div>
+      <div class="county-pills">
+        <span class="pill">Orange County</span>
+        <span class="pill">Southern Ulster County</span>
+        <span class="pill">Central Dutchess County</span>
+      </div>
+    </div>
+    <div class="area-right">
+      <div class="section-tag yellow">Service area</div>
+      <h2 class="reveal">Serving the beautiful Hudson Valley</h2>
+      <p class="reveal">We run scheduled routes through our service area on Tuesdays, Thursdays, and Saturdays. Not sure if we cover your town? Give us a call!</p>
+      <ul class="area-list reveal">
+        <li><div class="area-check">✓</div> Newburgh &amp; surrounding areas</li>
+        <li><div class="area-check">✓</div> Middletown &amp; Monroe</li>
+        <li><div class="area-check">✓</div> Kingston &amp; New Paltz</li>
+        <li><div class="area-check">✓</div> Poughkeepsie &amp; Hyde Park</li>
+        <li><div class="area-check">✓</div> Highland &amp; Marlboro</li>
+        <li><div class="area-check">✓</div> And more — just ask!</li>
+      </ul>
+      <div style="margin-top:28px;">
+        <a href="tel:8453747825" style="display:inline-flex;align-items:center;gap:10px;background:var(--yellow);color:#5A3D00;font-size:16px;font-weight:800;padding:14px 28px;border-radius:50px;text-decoration:none;transition:all 0.2s;"
+           onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+          📞 (845) 374-7825
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo">🐾 Roaming Rover</span>
+      <p>Full-service mobile dog grooming serving Orange, Ulster, and Dutchess Counties in New York's beautiful Hudson Valley.</p>
+      <a href="tel:8453747825" class="footer-phone">📞 (845) 374-7825</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Full groom</a></li>
+        <li><a href="#services">Bath &amp; brush</a></li>
+        <li><a href="#services">Nail trim</a></li>
+        <li><a href="#services">Puppy intro</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#area">Service area</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#book">Book now</a></li>
+        <li><a href="https://www.facebook.com/pages/Roaming-Rover-Mobile-Groomer/170976111014" target="_blank">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Roaming Rover Mobile Dog Grooming · All rights reserved</span>
+    <span>Made with 💕 in the Hudson Valley</span>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Form submit mock
+document.querySelector('.form-submit').addEventListener('click', function() {
+  this.textContent = '✅ Request sent! We\'ll call you soon.';
+  this.style.background = '#3DDBB8';
+  this.style.color = '#0D4438';
+  this.disabled = true;
+});
+</script>
+</body>
+</html>
